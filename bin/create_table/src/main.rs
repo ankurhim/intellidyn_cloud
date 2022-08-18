@@ -33,15 +33,17 @@ async fn create_table(
 
     let db_client = DynamodbClient::init().await?;
 
-    let resp = match db_client.create_table(&table.name, &table.key).await {
-        Ok(_) => format!("Table {} created with key {}", &table.name, &table.key),
-        Err(e) => format!("Table is not created due to error: {:?}", e)
-    };
-
-    let response = Response::builder()
-        .status(200)
+    let response = match db_client.create_table(&table.name, &table.key).await {
+        Ok(_) => Response::builder()
+        .status(201)
         .header("content-type", "application/json")
-        .body(Body::from(resp))?;
+        .body(Body::from(format!("Table {} created with key {}", &table.name, &table.key)))?,
+        
+        Err(e) => Response::builder()
+        .status(400)
+        .header("content-type", "application/json")
+        .body(Body::from(format!("Table is not created due to error: {:?}", e)))?
+    };
 
     Ok(response)
 }
