@@ -1,5 +1,16 @@
 use aws_config::meta::region::RegionProviderChain;
-use aws_sdk_dynamodb::{ Client, Error };
+use aws_sdk_dynamodb::{
+    Client,
+    Error,
+    model::{
+        AttributeDefinition,
+        ScalarAttributeType,
+        KeySchemaElement,
+        KeyType,
+        ProvisionedThroughput,
+    },
+    output::CreateTableOutput
+};
 
 #[derive(Debug)]
 pub struct DynamodbClient {
@@ -30,5 +41,36 @@ impl DynamodbClient {
         }
 
         Ok(table_exists)
+    }
+
+    pub async fn create_table(&self, table: &str, key: &str) -> Result<CreateTableOutput, Error> {
+        let a_name: String = key.into();
+        let table_name: String = table.into();
+    
+        let ad = AttributeDefinition::builder()
+            .attribute_name(&a_name)
+            .attribute_type(ScalarAttributeType::S)
+            .build();
+    
+        let ks = KeySchemaElement::builder()
+            .attribute_name(&a_name)
+            .key_type(KeyType::Hash)
+            .build();
+    
+        let pt = ProvisionedThroughput::builder()
+            .read_capacity_units(10)
+            .write_capacity_units(5)
+            .build();
+    
+        let result = self.db_client
+            .create_table()
+            .table_name(table_name)
+            .key_schema(ks)
+            .attribute_definitions(ad)
+            .provisioned_throughput(pt)
+            .send()
+            .await?;
+    
+        Ok(result)
     }
 }
