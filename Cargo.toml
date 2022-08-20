@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "bin/define_company",
+    "bin/define_company_code",
     "bin/list_companies",
     "bin/create_table",
     "lib/db",
