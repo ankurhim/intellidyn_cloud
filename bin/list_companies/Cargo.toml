@@ -1,5 +1,5 @@
 [package]
-name = "define_company"
+name = "list_companies"
 version = "0.1.0"
 edition = "2021"
 
@@ -11,11 +11,10 @@ lambda_http = "0.6.0"
 tokio = { version = "1", features = ["full"] }
 tracing = { version = "0.1.36", features = ["log"] }
 tracing-subscriber = { version = "0.3.15", default-features = false, features = ["fmt"] }
-uuid = { version = "1.1.2", features = ["serde", "v4"] }
 serde = { version = "1.0.142", features = ["derive"] }
 db = { path = "../../lib/db" }
 intellidyn_error = { path = "../../lib/intellidyn_error" }
 
 [[bin]]
-name = "define_company"
+name = "list_companies"
 path = "src/main.rs"

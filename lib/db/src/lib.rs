@@ -8,9 +8,12 @@ use aws_sdk_dynamodb::{
         KeySchemaElement,
         KeyType,
         ProvisionedThroughput,
+        AttributeValue
     },
     output::CreateTableOutput
 };
+use tokio_stream::StreamExt;
+use std::collections::HashMap;
 
 #[derive(Debug)]
 pub struct DynamodbClient {
@@ -73,4 +76,22 @@ impl DynamodbClient {
     
         Ok(result)
     }
+
+    pub async fn list_items(&self, table: &str) -> Result<Vec<HashMap<String, AttributeValue>>, Error> {
+        let items: Result<Vec<_>, _> = self.db_client
+            .scan()
+            .table_name(table)
+            .into_paginator()
+            .items()
+            .send()
+            .collect()
+            .await;
+    
+        let mut list = Vec::new();
+        for item in items? {
+            list.push(item)
+        }
+    
+        Ok(list)
+    }   
 }

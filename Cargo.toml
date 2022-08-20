@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "bin/define_company",
+    "bin/list_companies",
     "bin/create_table",
     "lib/db",
     "lib/intellidyn_error"

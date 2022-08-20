@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 aws-config = "0.47.0"
 aws-sdk-dynamodb = "0.17.0"
+tokio-stream = "0.1.9"
