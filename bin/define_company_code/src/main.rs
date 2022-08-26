@@ -98,6 +98,7 @@ async fn define_company_code(
         _ => AttributeValue::S(new_company_code.clone().unwrap().mobile_phone.unwrap().into())
     };
     let email_av = AttributeValue::S(new_company_code.clone().unwrap().email.into());
+    let postal_code_av = AttributeValue::S(new_company_code.clone().unwrap().postal_code.into());
 
     let comments_av = match new_company_code.clone().unwrap().comments.unwrap().len() {
         0 => AttributeValue::Null(true),
