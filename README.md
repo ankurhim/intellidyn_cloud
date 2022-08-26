@@ -13,10 +13,13 @@ An Enterprise Resource Planning Software built in Rust and AWS
 ----Definition
 -----Financial Accounting
 ------Define Company
-            https://yyxwp4x5je.execute-api.us-east-1.amazonaws.com/dev/define_company
+            https://6cdw15j8z9.execute-api.us-east-1.amazonaws.com/dev/define_company
 
 ------Edit, Copy, Delete, Check Company Code
-            https://8hs65bbaf5.execute-api.us-east-1.amazonaws.com/dev/define_company_code
+            https://f43b1z4pb9.execute-api.us-east-1.amazonaws.com/dev/define_company_code
 
 > List Companies
     https://ludlgaugei.execute-api.us-east-1.amazonaws.com/dev/list_companies
+
+> List CompanyCodes
+    https://grvhs1pamd.execute-api.us-east-1.amazonaws.com/dev/list_company_codes

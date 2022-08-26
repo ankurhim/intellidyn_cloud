@@ -4,50 +4,7 @@ use intellidyn_error::CustomError;
 use serde::Deserialize;
 use aws_sdk_dynamodb::model::AttributeValue;
 use uuid::Uuid;
-
-#[derive(Debug, Default, Deserialize, Clone)]
-struct CompanyCode {
-    #[serde(default)]
-    company_code: String,
-    #[serde(default)]
-    company_name: String,
-    #[serde(default)]
-    city: String,
-    #[serde(default)]
-    country: String,
-    #[serde(default)]
-    language: String,
-    #[serde(default)]
-    currency: String,
-    #[serde(default)]
-    title: String,
-    #[serde(default)]
-    search_terms: Vec<String>,
-    #[serde(default)]
-    street_house_no: String,
-    #[serde(default)]
-    postal_code: String,
-    #[serde(default)]
-    region: String,
-    #[serde(default)]
-    telephone: Option<String>,
-    #[serde(default)]
-    tel_ext: Option<String>,
-    #[serde(default)]
-    fax: Option<String>,
-    #[serde(default)]
-    fax_ext: Option<String>,
-    #[serde(default)]
-    mobile_phone: Option<String>,
-    #[serde(default)]
-    email: String,
-    #[serde(default)]
-    comments: Option<String>,
-    #[serde(default)]
-    request: Option<String>,
-    #[serde(default)]
-    short_desc: Option<String>
-}
+use models::company_code_model::CompanyCode;
 
 #[tokio::main]
 async fn main() -> Result<(), CustomError> {

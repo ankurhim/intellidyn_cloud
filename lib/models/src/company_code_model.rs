@@ -12,7 +12,6 @@ pub struct CompanyCode {
     pub search_terms: Vec<String>,
     pub street_house_no: String,
     pub postal_code: String,
-    pub region: String,
     pub telephone: Option<String>,
     pub tel_ext: Option<String>,
     pub fax: Option<String>,
