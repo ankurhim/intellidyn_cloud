@@ -4,34 +4,7 @@ use intellidyn_error::CustomError;
 use serde::Deserialize;
 use aws_sdk_dynamodb::model::AttributeValue;
 use uuid::Uuid;
-
-#[derive(Debug, Default, Deserialize, Clone)]
-struct Company {
-    #[serde(default)]
-    company_key: String,
-    #[serde(default)]
-    company_name: String,
-    #[serde(default)]
-    company_name_2: Option<String>,
-    #[serde(default)]
-    street: String,
-    #[serde(default)]
-    postal_code: String,
-    #[serde(default)]
-    city: String,
-    #[serde(default)]
-    country: String,
-    #[serde(default)]
-    language: String,
-    #[serde(default)]
-    currency: String,
-    #[serde(default)]
-    view_maintenance: Option<String>,
-    #[serde(default)]
-    request: Option<String>,
-    #[serde(default)]
-    short_desc: Option<String>
-}
+use models::company_model::Company;
 
 #[tokio::main]
 async fn main() -> Result<(), CustomError> {

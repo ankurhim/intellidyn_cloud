@@ -15,6 +15,7 @@ uuid = { version = "1.1.2", features = ["serde", "v4"] }
 serde = { version = "1.0.142", features = ["derive"] }
 db = { path = "../../lib/db" }
 intellidyn_error = { path = "../../lib/intellidyn_error" }
+models = { path = "../../lib/models" }
 
 [[bin]]
 name = "define_company"

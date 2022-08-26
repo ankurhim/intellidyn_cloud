@@ -19,4 +19,4 @@ An Enterprise Resource Planning Software built in Rust and AWS
             https://8hs65bbaf5.execute-api.us-east-1.amazonaws.com/dev/define_company_code
 
 > List Companies
- https://jtyyy2pgfg.execute-api.us-east-1.amazonaws.com/dev/list_companies
+    https://ludlgaugei.execute-api.us-east-1.amazonaws.com/dev/list_companies

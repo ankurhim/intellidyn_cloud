@@ -9,3 +9,4 @@ edition = "2021"
 aws-sdk-dynamodb = "0.17.0"
 aws-sdk-lambda = "0.17.0"
 lambda_http = "0.6.0"
+serde_dynamo = { version = "4.0.5", features = ["aws-sdk-dynamodb+0_17"] }

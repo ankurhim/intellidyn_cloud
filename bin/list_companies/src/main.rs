@@ -1,7 +1,7 @@
 use lambda_http::{service_fn, Request, RequestExt, Response, Body};
 use db::DynamodbClient;
 use aws_sdk_dynamodb::model::AttributeValue;
-use std::collections::HashMap;
+use models::company_model::Company;
 use intellidyn_error::CustomError;
 
 #[tokio::main]
@@ -22,7 +22,7 @@ pub async fn list_companies(request: Request) -> Result<Response<Body>, CustomEr
     
     let db_client = DynamodbClient::init().await?;
     
-    let companies_list: Vec<HashMap<String, AttributeValue>> = db_client.list_items("company").await?;
+    let companies_list: Vec<Company> = db_client.list_items("company").await?;
 
     let response = match &companies_list.len() {
         0 => Response::builder()

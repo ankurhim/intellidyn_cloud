@@ -9,3 +9,6 @@ edition = "2021"
 aws-config = "0.47.0"
 aws-sdk-dynamodb = "0.17.0"
 tokio-stream = "0.1.9"
+serde = { version = "1.0.142", features = ["derive"] }
+serde_dynamo = { version = "4.0.5", features = ["aws-sdk-dynamodb+0_17"] }
+intellidyn_error = { path = "../../lib/intellidyn_error" }

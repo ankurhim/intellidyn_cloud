@@ -2,13 +2,15 @@ use aws_sdk_dynamodb::types::SdkError;
 use lambda_http;
 use aws_sdk_lambda;
 use aws_sdk_dynamodb;
+use serde_dynamo;
 
 #[derive(Debug, Copy, Clone)]
 pub enum CustomErrorType {
     AwsError,
     LambdaError,
     HttpError,
-    SdkError
+    SdkError,
+    SerdeError,
 }
 
 #[derive(Debug)]
@@ -36,7 +38,14 @@ impl std::fmt::Display for CustomError {
     }
 }
 
-
+impl From<serde_dynamo::Error> for CustomError {
+    fn from(err: serde_dynamo::Error) -> CustomError {
+        CustomError {
+            message: Some(err.to_string()),
+            err_type: CustomErrorType::AwsError
+        }
+    }
+}
 
 impl From<aws_sdk_dynamodb::Error> for CustomError {
     fn from(err: aws_sdk_dynamodb::Error) -> CustomError {

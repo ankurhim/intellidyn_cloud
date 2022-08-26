@@ -8,12 +8,12 @@ use aws_sdk_dynamodb::{
         KeySchemaElement,
         KeyType,
         ProvisionedThroughput,
-        AttributeValue
     },
-    output::CreateTableOutput
+    output::{ CreateTableOutput, ScanOutput },
 };
-use tokio_stream::StreamExt;
-use std::collections::HashMap;
+use serde_dynamo::aws_sdk_dynamodb_0_17::from_item;
+use serde::Deserialize;
+use intellidyn_error::CustomError;
 
 #[derive(Debug)]
 pub struct DynamodbClient {
@@ -77,19 +77,18 @@ impl DynamodbClient {
         Ok(result)
     }
 
-    pub async fn list_items(&self, table: &str) -> Result<Vec<HashMap<String, AttributeValue>>, Error> {
-        let items: Result<Vec<_>, _> = self.db_client
-            .scan()
-            .table_name(table)
-            .into_paginator()
-            .items()
-            .send()
-            .collect()
-            .await;
+    pub async fn list_items<'a, T: Deserialize<'a>>(&self, table: &str) -> Result<Vec<T>, CustomError> {
+        let result: ScanOutput = self.db_client
+        .scan()
+        .table_name(table)
+        .send()
+        .await?;
     
         let mut list = Vec::new();
-        for item in items? {
-            list.push(item)
+        
+        for item in result.items.unwrap() {
+            let obj: T = from_item(item)?;
+            list.push(obj)
         }
     
         Ok(list)
