@@ -1,0 +1,1 @@
+{"errorType":"&alloc::boxed::Box<dyn core::any::Any+core::marker::Send>","errorMessage":"Lambda panicked"}

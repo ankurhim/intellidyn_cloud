@@ -2,8 +2,8 @@ build-IntellidynCloudFunction:
 	@echo "compiling...."
 	cargo build --release --target x86_64-unknown-linux-musl
 
-	@echo "creating list_company_codes bootstrap zip file..."
-	cp ./target/x86_64-unknown-linux-musl/release/list_company_codes ./bootstrap
+	@echo "creating assign_company_code_to_company bootstrap zip file..."
+	cp ./target/x86_64-unknown-linux-musl/release/assign_company_code_to_company ./bootstrap
 	zip -r bootstrap.zip bootstrap
 
 	@echo "uploading to s3 bucket..."
@@ -11,8 +11,8 @@ build-IntellidynCloudFunction:
 
 	@echo "create lambda function..."
 	aws lambda create-function \
-	--function-name ListCompanyCodes \
+	--function-name AssignCompanyCodeToCompany2 \
 	--runtime provided.al2 \
-	--handler main.list_company_codes \
+	--handler main.assign_company_code_to_company \
 	--role arn:aws:iam::105390037103:role/Intellidyn_Inc_Policy \
 	--zip-file fileb://bootstrap.zip

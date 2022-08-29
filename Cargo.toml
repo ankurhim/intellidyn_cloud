@@ -5,6 +5,7 @@ members = [
     "bin/list_companies",
     "bin/list_company_codes",
     "bin/create_table",
+    "bin/assign_company_code_to_company",
     "lib/db",
     "lib/intellidyn_error",
     "lib/models"
